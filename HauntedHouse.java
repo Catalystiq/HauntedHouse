@@ -20,7 +20,7 @@ public class HauntedHouse {
    public static void main(String args[]) {
       // arrayList for the inventory
       ArrayList<String> inventory = new ArrayList<String>();
-      
+
       System.out.println("");
 
       // starting the game
@@ -29,7 +29,7 @@ public class HauntedHouse {
 
    }
 
-   // GUI to show the player if they want to pick an item up or leave it
+   // GUI to show the player if they want to pick an iterm up or leave it
    public void item(HauntedHouse game, ArrayList<String> inventory) {
       Object itemObject[] = { "take knife", "leave it" };
 
@@ -185,12 +185,12 @@ public class HauntedHouse {
    public void i1(HauntedHouse game, ArrayList<String> inventory) {
       ImageIcon i1Image = new ImageIcon("./img/i1Image.png");
       String hallway1 = (String) JOptionPane.showInputDialog(null,
-            "As you walk through the corridor, you wonder who lived here, and what creatures are in here. \n You hear something behind you in the distance in the maze \n Enter a direction: straight, backwards",
+            "As you walk through the corridor, you wonder who lived here, and what creatures are in here. \n You hear something behind you in the distance in the maze \n Enter a direction: straight, go back",
             "HauntedHouse", JOptionPane.PLAIN_MESSAGE, i1Image, null, null);
       if (hallway1.toLowerCase().equals("straight")) {
          game.success(game, inventory);
          game.s2(game, inventory);
-      } else if (hallway1.toLowerCase().equals("backwards")) {
+      } else if (hallway1.toLowerCase().equals("go back")) {
          game.success(game, inventory);
          JOptionPane.showMessageDialog(null, "You go back to the previous intersection", "HauntedHouse",
                JOptionPane.INFORMATION_MESSAGE, null);
@@ -278,11 +278,11 @@ public class HauntedHouse {
 
    // win screen with an option to exit or restart
    public void mazeEnd(HauntedHouse game, ArrayList<String> inventory) {
-      ImageIcon win = new ImageIcon("./img/win.png");
+      ImageIcon win = new ImageIcon("./img/stairs.png");
       Object mazeEndObject[] = { "exit", "start over" };
 
       String option6 = (String) JOptionPane.showInputDialog(null,
-            "You fought the monster and you successfully killed the monster with your knife. \n You escaped the maze and leave the premises of the HauntedHouse \n For now... \n Thanks for Playing!",
+            "You fought the monster and you successfully killed the monster with your knife. \n As you go through the exit, there is a flight of stairs to an upper level \n There is a door at the top. \n Enter an option: enter, go back ",
             "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, win, mazeEndObject, mazeEndObject[0]);
 
       if (option6.toLowerCase().equals("exit")) {
