@@ -306,13 +306,47 @@ public class HauntedHouse {
             "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, win, mazeEndObject, mazeEndObject[0]);
 
       if (option6.toLowerCase().equals("enter")) {
-         System.exit(0);
+      game.success(game, inventory);
+         game.main(game, inventory);
       } else if (option6.toLowerCase().equals("go back")) {
-         game.success(game, inventory);
-         game.start(game, inventory);
+         game.back(game, inventory);
+         game.s4(game, inventory);
       } else {
          game.invalid(game, inventory);
          game.mazeEnd(game, inventory);
       }
+   }
+   public void main(HauntedHouse game, ArrayList<String> inventory){
+      ImageIcon mainImage = new ImageIcon("./img/mainImage.png");
+      Object mainObject[] = { "enter classroom", "enter bedroom", "go towards red door", "go back" };
+
+      String option7 = (String) JOptionPane.showInputDialog(null,
+            "Yoy go up the stairs and you seem to have entered the Haunted House. \n There are 2 rooms that you can go in and there is an ominous large red door in front of you \n You wonder how to get in there \n Choose an option: enter classroom, enter bedroom, go towards red door, go back",
+            "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, mainImage, mainObject, mainObject[0]);
+
+      if (option7.toLowerCase().equals("enter classroom")) {
+         game.classroom(game, inventory);
+      } else if (option7.toLowerCase().equals("enter bedroom")) {
+         game.bedroom(game, inventory);
+      } else if(option7.toLowerCase().equals("go towards red door")) {
+         game.door(game, inventory);
+      }else if(option7.toLowerCase().equals("go back")){
+         game.back(game, inventory);
+         game.mazeEnd(game, inventory);
+      }else{
+         game.invalid(game, inventory);
+         game.main(game, inventory);
+      }
+   }
+   public void classroom(HauntedHouse game, ArrayList<String> inventory){
+      
+   }
+   
+   public void bedroom(HauntedHouse game, ArrayList<String> inventory){
+   
+   }
+   
+   public void door(HauntedHouse game, ArrayList<String> inventory){
+   
    }
 }
