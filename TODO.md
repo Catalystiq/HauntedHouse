@@ -8,4 +8,4 @@
 - [ ] boss door with a code with a boss fight with several options
 - [ ] good ending by killing the boss
 - [ ] bad ending by dying to the boss
-- [ ] neutral ending with a secret passage way in one of the rooms.
+- [x] neutral ending with a secret passage way in one of the rooms.

@@ -27,21 +27,41 @@ public class HauntedHouse {
 
    // GUI to show the player if they want to pick an iterm up or leave it
    public void knife(HauntedHouse game, ArrayList<String> inventory) {
-      Object itemObject[] = { "take knife", "leave it" };
+      Object knifeObject[] = { "take knife", "leave it" };
 
       ImageIcon knifeImage = new ImageIcon("./img/knife.png");
-      String itemOption = (String) JOptionPane.showInputDialog(null,
+      String knifeOption = (String) JOptionPane.showInputDialog(null,
             "You turn around the corner and find a knife on the floor. \n You wonder what left this here \n Pick an option: take knife, leave it",
-            "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, knifeImage, itemObject, itemObject);
-      if (itemOption.toLowerCase().equals("take knife")) {
+            "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, knifeImage, knifeObject, knifeObject);
+      if (knifeOption.toLowerCase().equals("take knife")) {
          inventory.add("knife");
          JOptionPane.showMessageDialog(null,
                "You pick up the knife and go back to the intersection from where you came from", "HauntedHouse",
                JOptionPane.INFORMATION_MESSAGE, null);
          game.success(game, inventory);
-      } else if (itemOption.toLowerCase().equals("leave it")) {
+      } else if (knifeOption.toLowerCase().equals("leave it")) {
          JOptionPane.showMessageDialog(null,
                "You leave the knife and go back to the intersection from where you came from", "HauntedHouse",
+               JOptionPane.INFORMATION_MESSAGE, null);
+      }
+   }
+
+   public void medkit(HauntedHouse game, ArrayList<String> inventory) {
+      Object medkitObject[] = { "take medkit", "leave it" };
+
+      ImageIcon medkitImage = new ImageIcon("./img/medkit.png");
+      String medkitOption = (String) JOptionPane.showInputDialog(null,
+            "You turn around the corner and find a medkit on the floor. \n You wonder what left this here \n Pick an option: take medkit, leave it",
+            "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, medkitImage, medkitObject, medkitObject);
+      if (medkitOption.toLowerCase().equals("take medkit")) {
+         inventory.add("medkit");
+         JOptionPane.showMessageDialog(null,
+               "You pick up the medkit and go back to the intersection from where you came from", "HauntedHouse",
+               JOptionPane.INFORMATION_MESSAGE, null);
+         game.success(game, inventory);
+      } else if (medkitOption.toLowerCase().equals("leave it")) {
+         JOptionPane.showMessageDialog(null,
+               "You leave the medkit and go back to the intersection from where you came from", "HauntedHouse",
                JOptionPane.INFORMATION_MESSAGE, null);
       }
    }
@@ -224,7 +244,7 @@ public class HauntedHouse {
          game.s3(game, inventory);
       } else if (s2Option.toLowerCase().equals("left")) {
          game.success(game, inventory);
-         game.knife(game, inventory);
+         game.medkit(game, inventory);
          game.s2(game, inventory);
       } else if (s2Option.toLowerCase().equals("go back")) {
          game.back(game, inventory);
@@ -392,6 +412,7 @@ public class HauntedHouse {
                "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, cabinetImage, cabinetObject, cabinetObject[0]);
 
          if (cabinetOption.toLowerCase().equals("open cabinet")) {
+            game.success(game, inventory);
             String neutralOption = (String) JOptionPane.showInputDialog(null,
                   "As you open the cabinet you get sucked into the wormhole in the bottom. \n You go back home where everything seems to be normal. \n But you don't know what kind of still remianed in that house. Select an option: exit, start over",
                   "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, neutralImage, neutralObject, neutralObject[0]);
@@ -414,7 +435,45 @@ public class HauntedHouse {
    }
 
    public void bedroom(HauntedHouse game, ArrayList<String> inventory) {
+      ImageIcon bedroomImage = new ImageIcon("./img/bedroomImage.png");
+      ImageIcon bedsideImage = new ImageIcon("./img/bedsideImage.png");
+      ImageIcon carpetImage = new ImageIcon("./img/carpetImage.png");
+      ImageIcon bedImage = new ImageIcon("./img/bedImage.png");
+      ImageIcon medkitImage = new ImageIcon("./img/medkit.png");
+      Object bedroomObject[] = { "bed", "bedside table", "dresser", "carpet", "go back" };
 
+      String bedroomOption = (String) JOptionPane.showInputDialog(null,
+            "You go left into the bedroom and there are many pieces of furniture present with many things around the room \n Choose an option: bed, bedside table, dresser, carpet, go back",
+            "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, bedroomImage, bedroomObject, bedroomObject[0]);
+
+      if (bedroomOption.toLowerCase().equals("bed")) {
+         JOptionPane.showMessageDialog(null,
+               "You go over to the bed and observe it. \n You notice on the side that there is a part of a code that is marked on the side of the bed \n You will have to look around for the rest of the code.",
+               "HauntedHouse", JOptionPane.INFORMATION_MESSAGE, bedImage);
+         game.bedroom(game, inventory);
+      } else if (bedroomOption.toLowerCase().equals("bedside table")) {
+         JOptionPane.showMessageDialog(null,
+               "You go over to the bedside table and you open the drawers. There is just junk and random things. \n Nothing much of use here.",
+               "HauntedHouse", JOptionPane.INFORMATION_MESSAGE, bedsideImage);
+         game.bedroom(game, inventory);
+      } else if (bedroomOption.toLowerCase().equals("dresser")) {
+         JOptionPane.showMessageDialog(null,
+               "You go over to the dresser and you open the drawers. There is just junk and some clothes. \n But then on top of the dresser you notice medkit on top \n You take the medkit just in case for the future",
+               "HauntedHouse", JOptionPane.INFORMATION_MESSAGE, medkitImage);
+         inventory.add("medkit");
+         game.bedroom(game, inventory);
+      } else if (bedroomOption.toLowerCase().equals("carpet")) {
+         JOptionPane.showMessageDialog(null,
+               "You go over to the carpet and observe it. \n You notice that on the carpet is a part of a code  \n You will have to look around for the rest of the code.",
+               "HauntedHouse", JOptionPane.INFORMATION_MESSAGE, carpetImage);
+         game.bedroom(game, inventory);
+      } else if (bedroomOption.toLowerCase().equals("go back")) {
+         game.back(game, inventory);
+         game.main(game, inventory);
+      } else {
+         game.invalid(game, inventory);
+         game.bedroom(game, inventory);
+      }
    }
 
    public void door(HauntedHouse game, ArrayList<String> inventory) {
