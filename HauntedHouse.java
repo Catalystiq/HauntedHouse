@@ -95,7 +95,7 @@ public class HauntedHouse {
    // intro sequence with opening lore and map
    public void intro(HauntedHouse game, ArrayList<String> inventory) {
       ImageIcon maze = new ImageIcon("./img/startMaze.png");
-      Object introObject[] = { "start", "exit", "test" };
+      Object introObject[] = { "start", "exit" };
 
       String introOption = (String) JOptionPane.showInputDialog(null,
             "HauntedHouse Maze Project \n You have arrived at a House that appears to be Haunted. \n The door is locked so you decide to go to the back. \n You enter the back in which the walls are vines. \n As you enter, the entrance behind you closes and now you are in a maze that you must escape. \n There may be unknown creatures here as well. \n There is a map on your left. \n Light green is the start\n Light red is the exit to the stairs \n Dark red are enemies \n Light blue are items \n Good Luck \n Select an option: start, exit",
@@ -106,8 +106,9 @@ public class HauntedHouse {
          game.start(game, inventory);
       } else if (introOption.toLowerCase().equals("exit")) {
          System.exit(0);
-      } else if (introOption.toLowerCase().equals("test")) {
-         game.boss(game, inventory);
+      } else {
+         game.invalid(game, inventory);
+         game.intro(game, inventory);
       }
    }
 
