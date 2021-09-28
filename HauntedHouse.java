@@ -95,7 +95,7 @@ public class HauntedHouse {
    // intro sequence with opening lore and map
    public void intro(HauntedHouse game, ArrayList<String> inventory) {
       ImageIcon maze = new ImageIcon("./img/startMaze.png");
-      Object introObject[] = { "start", "exit" };
+      Object introObject[] = { "start", "exit", "test" };
 
       String introOption = (String) JOptionPane.showInputDialog(null,
             "HauntedHouse Maze Project \n You have arrived at a House that appears to be Haunted. \n The door is locked so you decide to go to the back. \n You enter the back in which the walls are vines. \n As you enter, the entrance behind you closes and now you are in a maze that you must escape. \n There may be unknown creatures here as well. \n There is a map on your left. \n Light green is the start\n Light red is the exit to the stairs \n Dark red are enemies \n Light blue are items \n Good Luck \n Select an option: start, exit",
@@ -106,6 +106,8 @@ public class HauntedHouse {
          game.start(game, inventory);
       } else if (introOption.toLowerCase().equals("exit")) {
          System.exit(0);
+      } else if (introOption.toLowerCase().equals("test")) {
+         game.boss(game, inventory);
       }
    }
 
@@ -477,6 +479,86 @@ public class HauntedHouse {
    }
 
    public void door(HauntedHouse game, ArrayList<String> inventory) {
+      ImageIcon doorImage = new ImageIcon("./img/doorImage.png");
 
+      String doorOption = (String) JOptionPane.showInputDialog(null,
+            "You arrive at the ominous door but it is locked with a code input. \n Enter the code to continue. \n If you do not know the code, enter an invalid code and you will go back to the maid room",
+            "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, doorImage, null, null);
+
+      if (doorOption.toLowerCase().equals("2697")) {
+         game.success(game, inventory);
+         game.died(game, inventory);
+         game.boss(game, inventory);
+      } else {
+         game.died(game, inventory);
+         JOptionPane.showMessageDialog(null, "Incorrect code, returning you back to the main room", "HauntedHouse",
+               JOptionPane.ERROR_MESSAGE, null);
+         game.main(game, inventory);
+      }
+   }
+
+   public void boss(HauntedHouse game, ArrayList<String> inventory) {
+      ImageIcon bossImage = new ImageIcon("./img/bossImage.png");
+      ImageIcon goodImage = new ImageIcon("./img/goodImage.png");
+      ImageIcon badImage = new ImageIcon("./img/badImage.png");
+      int health = 100;
+      int bossHealth = 100;
+      Object bossObject[] = { "fight", "heal", "defend" };
+      Object goodObject[] = { "exit", "start over" };
+      Object badObject[] = { "exit", "start over" };
+
+      JOptionPane.showMessageDialog(null,
+            "As you enter the code and walk through the door, you see a large boss monster coming at you. \n It says that you shall not pass unless you defeat them \n Let the battle commense!",
+            "HauntedHouse", JOptionPane.INFORMATION_MESSAGE, bossImage);
+      while (true) {
+         Random rand = new Random();
+         int bossAttack = rand.nextInt(50);
+
+         String bossOption = (String) JOptionPane.showInputDialog(null,
+               "Fight the boss! \n Your hp is: " + health + ". The boss health is: " + bossHealth + ".", "HauntedHouse",
+               JOptionPane.YES_NO_CANCEL_OPTION, bossImage, bossObject, bossObject[0]);
+         if (bossOption.toLowerCase().equals("fight")) {
+            bossHealth = bossHealth - 20;
+            health = health - bossAttack;
+
+            JOptionPane.showMessageDialog(null,
+                  "You have attacked for 20 damage and the boss has attacked you for " + bossAttack
+                        + " damage. \n Your health is: " + health + ". The boss health is: " + bossHealth + ".",
+                  "HauntedHouse", JOptionPane.INFORMATION_MESSAGE, null);
+            if (bossHealth <= 0) {
+               game.success(game, inventory);
+               String goodOption = (String) JOptionPane.showInputDialog(null,
+                     "You have successfully killed the boss with your knife and were able to escape the Haunted House. \n Peace has been restored with the world and everything is normal, for now... Choose an option: exit, start over",
+                     "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, goodImage, goodObject, goodObject[0]);
+               if (goodOption.toLowerCase().equals("exit")) {
+                  System.exit(0);
+               } else if (goodOption.toLowerCase().equals("start over")) {
+                  game.intro(game, inventory);
+               }
+            }
+            if (health <= 0) {
+               game.died(game, inventory);
+               String badOption = (String) JOptionPane.showInputDialog(null,
+                     "As you tried to kill the boss, the boss killed you instead. The world will never be at peace again... Choose an option: exit, start over",
+                     "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, badImage, badObject, badObject[0]);
+               if (badOption.toLowerCase().equals("exit")) {
+                  System.exit(0);
+               } else if (badOption.toLowerCase().equals("start over")) {
+                  game.intro(game, inventory);
+               }
+            }
+            bossAttack = rand.nextInt(40);
+         } else if (bossOption.toLowerCase().equals("heal") && inventory.contains("medkit")) {
+            health = health + 30;
+            JOptionPane.showMessageDialog(null, "You have healed for 30 damage", "HauntedHouse",
+                  JOptionPane.INFORMATION_MESSAGE, null);
+         } else if (bossOption.toLowerCase().equals("heal") && !inventory.contains("medkit")) {
+            JOptionPane.showMessageDialog(null, "You do not have any healing in your inventory!", "HauntedHouse",
+                  JOptionPane.ERROR_MESSAGE, null);
+         } else if (bossOption.toLowerCase().equals("defend")) {
+            JOptionPane.showMessageDialog(null, "You have defended against the boss and took 0 damage", "HauntedHouse",
+                  JOptionPane.INFORMATION_MESSAGE, null);
+         }
+      }
    }
 }
