@@ -102,19 +102,19 @@ public class HauntedHouse {
    // start screen with the first intersection and choice
    public void start(HauntedHouse game, ArrayList<String> inventory) {
       ImageIcon start = new ImageIcon("./img/start.png");
-      Object startOption[] = { "straight", "left", "go back" };
-      String option1 = (String) JOptionPane.showInputDialog(null,
+      Object startObject[] = { "straight", "left", "go back" };
+      String startOption = (String) JOptionPane.showInputDialog(null,
             "You have entered the maze and you arrive at an intersection. Choose a direction: straight, left, go back",
-            "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, start, startOption, startOption[0]);
+            "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, start, startObject, startObject[0]);
 
-      if (option1.toLowerCase().equals("straight")) {
+      if (startOption.toLowerCase().equals("straight")) {
          game.success(game, inventory);
          game.s1(game, inventory);
-      } else if (option1.toLowerCase().equals("left")) {
+      } else if (startOption.toLowerCase().equals("left")) {
          game.died(game, inventory);
          game.death(game, inventory);
          game.start(game, inventory);
-      } else if (option1.toLowerCase().equals("go back")) {
+      } else if (startOption.toLowerCase().equals("go back")) {
          game.back(game, inventory);
          game.intro(game, inventory);
       } else {
@@ -168,22 +168,22 @@ public class HauntedHouse {
    public void s1(HauntedHouse game, ArrayList<String> inventory) {
       ImageIcon s1Image = new ImageIcon("./img/s1Image.png");
       Object s1Object[] = { "left", "right", "back right", "go back" };
-      String option2 = (String) JOptionPane.showInputDialog(null,
+      String s1Option = (String) JOptionPane.showInputDialog(null,
             "You move through the maze and you encountered an intersection \n Choose a direction: left, right, back right",
             "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, s1Image, s1Object, s1Object[0]);
 
-      if (option2.toLowerCase().equals("left")) {
+      if (s1Option.toLowerCase().equals("left")) {
          game.success(game, inventory);
          game.i1(game, inventory);
-      } else if (option2.toLowerCase().equals("right")) {
+      } else if (s1Option.toLowerCase().equals("right")) {
          game.success(game, inventory);
          game.knife(game, inventory);
          game.s1(game, inventory);
-      } else if (option2.toLowerCase().equals("back right")) {
+      } else if (s1Option.toLowerCase().equals("back right")) {
          game.died(game, inventory);
          game.death(game, inventory);
          game.s1(game, inventory);
-      } else if (option2.toLowerCase().equals("go back")) {
+      } else if (s1Option.toLowerCase().equals("go back")) {
          game.back(game, inventory);
          game.start(game, inventory);
       } else {
@@ -197,13 +197,13 @@ public class HauntedHouse {
    public void i1(HauntedHouse game, ArrayList<String> inventory) {
       ImageIcon i1Image = new ImageIcon("./img/i1Image.png");
       Object i1Object[] = { "straight", "go back" };
-      String hallway1 = (String) JOptionPane.showInputDialog(null,
+      String i1Option = (String) JOptionPane.showInputDialog(null,
             "As you walk through the corridor, you wonder who lived here, and what creatures are in here. \n You hear something behind you in the distance in the maze \n Choose a direction: straight, go back",
             "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, i1Image, i1Object, i1Object[0]);
-      if (hallway1.toLowerCase().equals("straight")) {
+      if (i1Option.toLowerCase().equals("straight")) {
          game.success(game, inventory);
          game.s2(game, inventory);
-      } else if (hallway1.toLowerCase().equals("go back")) {
+      } else if (i1Option.toLowerCase().equals("go back")) {
          game.back(game, inventory);
          game.s1(game, inventory);
       } else {
@@ -216,17 +216,17 @@ public class HauntedHouse {
    public void s2(HauntedHouse game, ArrayList<String> inventory) {
       ImageIcon s2Image = new ImageIcon("./img/s2Image.png");
       Object s2Object[] = { "right", "left", "go back" };
-      String option3 = (String) JOptionPane.showInputDialog(null,
+      String s2Option = (String) JOptionPane.showInputDialog(null,
             "You walk past the corridor and the noises from behind you, You have encounted another intersection. \n Choose a direction: right, left",
             "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, s2Image, s2Object, s2Object[0]);
-      if (option3.toLowerCase().equals("right")) {
+      if (s2Option.toLowerCase().equals("right")) {
          game.success(game, inventory);
          game.s3(game, inventory);
-      } else if (option3.toLowerCase().equals("left")) {
+      } else if (s2Option.toLowerCase().equals("left")) {
          game.success(game, inventory);
          game.knife(game, inventory);
          game.s2(game, inventory);
-      } else if (option3.toLowerCase().equals("go back")) {
+      } else if (s2Option.toLowerCase().equals("go back")) {
          game.back(game, inventory);
          game.i1(game, inventory);
       } else {
@@ -239,17 +239,17 @@ public class HauntedHouse {
    public void s3(HauntedHouse game, ArrayList<String> inventory) {
       ImageIcon s3Image = new ImageIcon("./img/s3Image.png");
       Object s3Object[] = { "right", "left", "go back" };
-      String option4 = (String) JOptionPane.showInputDialog(null,
+      String s3Option = (String) JOptionPane.showInputDialog(null,
             "The end seems to be approaching, but the maze continues and you reach another intersection. There appear to be noises all around you \n Choose a direction: right, left",
             "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, s3Image, s3Object, s3Object[0]);
-      if (option4.toLowerCase().equals("left")) {
+      if (s3Option.toLowerCase().equals("left")) {
          game.success(game, inventory);
          game.s4(game, inventory);
-      } else if (option4.toLowerCase().equals("right")) {
+      } else if (s3Option.toLowerCase().equals("right")) {
          game.died(game, inventory);
          game.death(game, inventory);
          game.s3(game, inventory);
-      } else if (option4.toLowerCase().equals("go back")) {
+      } else if (s3Option.toLowerCase().equals("go back")) {
          game.back(game, inventory);
          game.s2(game, inventory);
       } else {
@@ -264,10 +264,10 @@ public class HauntedHouse {
       ImageIcon dead = new ImageIcon("./img/dead.png");
       Object deathObject[] = { "start over", "exit" };
       Object fightObject[] = { "fight", "run" };
-      String option5 = (String) JOptionPane.showInputDialog(null,
+      String s4Option = (String) JOptionPane.showInputDialog(null,
             "As you turn left, you see the exit, but a monster from the left sees you and comes towards you from the corridor. \n Choose an option: fight, run",
             "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, s4Image, fightObject, fightObject[0]);
-      if (option5.toLowerCase().equals("fight") && !inventory.contains("knife")) {
+      if (s4Option.toLowerCase().equals("fight") && !inventory.contains("knife")) {
          String deathOption = (String) JOptionPane.showInputDialog(null,
                "You tried to kill the monster with your hands but it didn't work and the monster has killed you \n Choose an option: start over, exit",
                "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, dead, deathObject, deathObject[0]);
@@ -281,11 +281,11 @@ public class HauntedHouse {
             game.invalid(game, inventory);
             game.death(game, inventory);
          }
-      } else if (option5.toLowerCase().equals("fight") && inventory.contains("knife")) {
+      } else if (s4Option.toLowerCase().equals("fight") && inventory.contains("knife")) {
          game.success(game, inventory);
          game.mazeEnd(game, inventory);
 
-      } else if (option5.toLowerCase().equals("run")) {
+      } else if (s4Option.toLowerCase().equals("run")) {
          JOptionPane.showMessageDialog(null,
                "You successfully ran away from the monster and you go back to the intersection from where you came",
                "HauntedHouse", JOptionPane.INFORMATION_MESSAGE, null);
@@ -301,14 +301,14 @@ public class HauntedHouse {
       ImageIcon win = new ImageIcon("./img/stairs.png");
       Object mazeEndObject[] = { "enter", "go back" };
 
-      String option6 = (String) JOptionPane.showInputDialog(null,
+      String mazeEndOption = (String) JOptionPane.showInputDialog(null,
             "You fought the monster and you successfully killed the monster with your knife. \n As you go through the exit, there is a flight of stairs to an upper level \n There is a door at the top. \n Enter an option: enter, go back ",
             "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, win, mazeEndObject, mazeEndObject[0]);
 
-      if (option6.toLowerCase().equals("enter")) {
-      game.success(game, inventory);
+      if (mazeEndOption.toLowerCase().equals("enter")) {
+         game.success(game, inventory);
          game.main(game, inventory);
-      } else if (option6.toLowerCase().equals("go back")) {
+      } else if (mazeEndOption.toLowerCase().equals("go back")) {
          game.back(game, inventory);
          game.s4(game, inventory);
       } else {
@@ -316,37 +316,66 @@ public class HauntedHouse {
          game.mazeEnd(game, inventory);
       }
    }
-   public void main(HauntedHouse game, ArrayList<String> inventory){
+
+   public void main(HauntedHouse game, ArrayList<String> inventory) {
       ImageIcon mainImage = new ImageIcon("./img/mainImage.png");
       Object mainObject[] = { "enter classroom", "enter bedroom", "go towards red door", "go back" };
 
-      String option7 = (String) JOptionPane.showInputDialog(null,
-            "Yoy go up the stairs and you seem to have entered the Haunted House. \n There are 2 rooms that you can go in and there is an ominous large red door in front of you \n You wonder how to get in there \n Choose an option: enter classroom, enter bedroom, go towards red door, go back",
+      String mainOption = (String) JOptionPane.showInputDialog(null,
+            "You go up the stairs and you seem to have entered the Haunted House. \n There are 2 rooms that you can go in and there is an ominous large red door in front of you \n You wonder how to get in there \n Choose an option: enter classroom, enter bedroom, go towards red door, go back",
             "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, mainImage, mainObject, mainObject[0]);
 
-      if (option7.toLowerCase().equals("enter classroom")) {
+      if (mainOption.toLowerCase().equals("enter classroom")) {
+         game.success(game, inventory);
          game.classroom(game, inventory);
-      } else if (option7.toLowerCase().equals("enter bedroom")) {
+      } else if (mainOption.toLowerCase().equals("enter bedroom")) {
+         game.success(game, inventory);
          game.bedroom(game, inventory);
-      } else if(option7.toLowerCase().equals("go towards red door")) {
+      } else if (mainOption.toLowerCase().equals("go towards red door")) {
+         game.success(game, inventory);
          game.door(game, inventory);
-      }else if(option7.toLowerCase().equals("go back")){
+      } else if (mainOption.toLowerCase().equals("go back")) {
          game.back(game, inventory);
          game.mazeEnd(game, inventory);
-      }else{
+      } else {
          game.invalid(game, inventory);
          game.main(game, inventory);
       }
    }
-   public void classroom(HauntedHouse game, ArrayList<String> inventory){
-      
+
+   public void classroom(HauntedHouse game, ArrayList<String> inventory) {
+      Object classroomObject[] = { "front table", "desk", "chair", "computer", "chalk board", "cabinet", "go back" };
+
+      String classroomOption = (String) JOptionPane.showInputDialog(null,
+            "You go to the right to the classroom and you go inside. \n It seems to be abandoned and there are many items appeared to be scattered around the room. \n Choose an item/option: front table, desk, chair, computer, chalk board, cabinet, go back",
+            "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, null, classroomObject, classroomObject[0]);
+
+      if (classroomOption.toLowerCase().equals("front table")) {
+
+      } else if (classroomOption.toLowerCase().equals("desk")) {
+
+      } else if (classroomOption.toLowerCase().equals("chair")) {
+
+      } else if (classroomOption.toLowerCase().equals("computer")) {
+
+      } else if (classroomOption.toLowerCase().equals("chalk board")) {
+
+      } else if (classroomOption.toLowerCase().equals("cabinet")) {
+
+      } else if (classroomOption.toLowerCase().equals("go back")) {
+         game.back(game, inventory);
+         game.main(game, inventory);
+      } else {
+         game.invalid(game, inventory);
+         game.classroom(game, inventory);
+      }
    }
-   
-   public void bedroom(HauntedHouse game, ArrayList<String> inventory){
-   
+
+   public void bedroom(HauntedHouse game, ArrayList<String> inventory) {
+
    }
-   
-   public void door(HauntedHouse game, ArrayList<String> inventory){
-   
+
+   public void door(HauntedHouse game, ArrayList<String> inventory) {
+
    }
 }
