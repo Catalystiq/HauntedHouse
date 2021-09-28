@@ -94,6 +94,7 @@ public class HauntedHouse {
 
    // intro sequence with opening lore and map
    public void intro(HauntedHouse game, ArrayList<String> inventory) {
+      inventory.clear();
       ImageIcon maze = new ImageIcon("./img/startMaze.png");
       Object introObject[] = { "start", "exit" };
 
@@ -291,6 +292,7 @@ public class HauntedHouse {
             "As you turn left, you see the exit, but a monster from the left sees you and comes towards you from the corridor. \n Choose an option: fight, run",
             "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, s4Image, fightObject, fightObject[0]);
       if (s4Option.toLowerCase().equals("fight") && !inventory.contains("knife")) {
+         game.died(game, inventory);
          String deathOption = (String) JOptionPane.showInputDialog(null,
                "You tried to kill the monster with your hands but it didn't work and the monster has killed you \n Choose an option: start over, exit",
                "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, dead, deathObject, deathObject[0]);
@@ -483,7 +485,7 @@ public class HauntedHouse {
       ImageIcon doorImage = new ImageIcon("./img/doorImage.png");
 
       String doorOption = (String) JOptionPane.showInputDialog(null,
-            "You arrive at the ominous door but it is locked with a code input. \n Enter the code to continue. \n If you do not know the code, enter an invalid code and you will go back to the maid room",
+            "You arrive at the ominous door but it is locked with a code input. \n Enter the code to continue. \n If you do not know the code, enter an invalid code and you will go back to the main room",
             "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, doorImage, null, null);
 
       if (doorOption.toLowerCase().equals("2697")) {
@@ -553,6 +555,7 @@ public class HauntedHouse {
             health = health + 30;
             JOptionPane.showMessageDialog(null, "You have healed for 30 damage", "HauntedHouse",
                   JOptionPane.INFORMATION_MESSAGE, null);
+            inventory.remove("medkit");
          } else if (bossOption.toLowerCase().equals("heal") && !inventory.contains("medkit")) {
             JOptionPane.showMessageDialog(null, "You do not have any healing in your inventory!", "HauntedHouse",
                   JOptionPane.ERROR_MESSAGE, null);
