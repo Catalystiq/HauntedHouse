@@ -51,7 +51,7 @@ public class HauntedHouse {
       try {
          AudioInputStream input = AudioSystem.getAudioInputStream(new File("audio/success.wav"));
          Clip clip = AudioSystem.getClip();
-         Thread.sleep(10); // 1000ms
+         Thread.sleep(10);
          clip.open(input);
          clip.loop(0);
          Thread.sleep(1000);
@@ -64,7 +64,7 @@ public class HauntedHouse {
       try {
          AudioInputStream input = AudioSystem.getAudioInputStream(new File("audio/died.wav"));
          Clip clip = AudioSystem.getClip();
-         Thread.sleep(10); // 1000ms
+         Thread.sleep(10);
          clip.open(input);
          clip.loop(0);
          Thread.sleep(1000);
@@ -344,24 +344,66 @@ public class HauntedHouse {
    }
 
    public void classroom(HauntedHouse game, ArrayList<String> inventory) {
+      ImageIcon classroomImage = new ImageIcon("./img/classroomImage.png");
+      ImageIcon tableImage = new ImageIcon("./img/tableImage.png");
+      ImageIcon chairImage = new ImageIcon("./img/chairImage.png");
+      ImageIcon rustyKnifeImage = new ImageIcon("./img/rustyKnife.png");
+      ImageIcon chalkBoardImage = new ImageIcon("./img/chalkBoardImage.png");
+      ImageIcon computerImage = new ImageIcon("./img/computerImage.png");
+      ImageIcon cabinetImage = new ImageIcon("./img/cabinetImage.png");
+      ImageIcon neutralImage = new ImageIcon("./img/neutralImage.png");
       Object classroomObject[] = { "front table", "desk", "chair", "computer", "chalk board", "cabinet", "go back" };
+      Object cabinetObject[] = { "open cabinet", "go back" };
+      Object neutralObject[] = { "exit", "start over" };
 
       String classroomOption = (String) JOptionPane.showInputDialog(null,
             "You go to the right to the classroom and you go inside. \n It seems to be abandoned and there are many items appeared to be scattered around the room. \n Choose an item/option: front table, desk, chair, computer, chalk board, cabinet, go back",
-            "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, null, classroomObject, classroomObject[0]);
+            "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, classroomImage, classroomObject, classroomObject[0]);
 
       if (classroomOption.toLowerCase().equals("front table")) {
-
+         JOptionPane.showMessageDialog(null,
+               "You go over to the front table and find a lot of papers and pens. \n Nothing much of use here.",
+               "HauntedHouse", JOptionPane.INFORMATION_MESSAGE, tableImage);
+         game.classroom(game, inventory);
       } else if (classroomOption.toLowerCase().equals("desk")) {
-
+         JOptionPane.showMessageDialog(null,
+               "You look on the desk and you find a rusty knife on the table. \n Even though you already have a nicer one, it might come in handy if it breaks.",
+               "HauntedHouse", JOptionPane.INFORMATION_MESSAGE, rustyKnifeImage);
+         inventory.add("rusty knife");
+         game.classroom(game, inventory);
       } else if (classroomOption.toLowerCase().equals("chair")) {
-
+         JOptionPane.showMessageDialog(null,
+               "You go over to the chair and see what is around it. \n just some paper and books. \n Nothing really of use here",
+               "HauntedHouse", JOptionPane.INFORMATION_MESSAGE, chairImage);
+         game.classroom(game, inventory);
       } else if (classroomOption.toLowerCase().equals("computer")) {
-
+         JOptionPane.showMessageDialog(null,
+               "You go over to the computer and see what is on screen. \n A text file appears to be open with a part of a code written there. \n You will have to look around more to find the rest of the code somewhere. \n You go back to see the classroom for more items and clues.",
+               "HauntedHouse", JOptionPane.INFORMATION_MESSAGE, computerImage);
+         game.classroom(game, inventory);
       } else if (classroomOption.toLowerCase().equals("chalk board")) {
-
+         JOptionPane.showMessageDialog(null,
+               "You go over to the chalk board and look at it. \n There seems to be part of a code written on the chalk board. \n You will have to look around more for the rest of the code. \n You go back to see the classroom for more items and clues.",
+               "HauntedHouse", JOptionPane.INFORMATION_MESSAGE, chalkBoardImage);
+         game.classroom(game, inventory);
       } else if (classroomOption.toLowerCase().equals("cabinet")) {
+         String cabinetOption = (String) JOptionPane.showInputDialog(null,
+               "You go to the cabinet and at first it appears to just have junk in it, but you hear some kind of wormhole/dimesional sound coming from it as well. \n Select an option: open cabinet, go back",
+               "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, cabinetImage, cabinetObject, cabinetObject[0]);
 
+         if (cabinetOption.toLowerCase().equals("open cabinet")) {
+            String neutralOption = (String) JOptionPane.showInputDialog(null,
+                  "As you open the cabinet you get sucked into the wormhole in the bottom. \n You go back home where everything seems to be normal. \n But you don't know what kind of still remianed in that house. Select an option: exit, start over",
+                  "HauntedHouse", JOptionPane.YES_NO_CANCEL_OPTION, neutralImage, neutralObject, neutralObject[0]);
+            if (neutralOption.toLowerCase().equals("exit")) {
+               System.exit(0);
+            } else if (neutralOption.toLowerCase().equals("start over")) {
+               game.intro(game, inventory);
+            }
+         } else if (cabinetOption.toLowerCase().equals("go back")) {
+            game.back(game, inventory);
+            game.classroom(game, inventory);
+         }
       } else if (classroomOption.toLowerCase().equals("go back")) {
          game.back(game, inventory);
          game.main(game, inventory);
