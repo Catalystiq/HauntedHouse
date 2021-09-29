@@ -372,11 +372,11 @@ public class HauntedHouse {
       ImageIcon classroomImage = new ImageIcon("./img/classroomImage.png");
       ImageIcon tableImage = new ImageIcon("./img/tableImage.png");
       ImageIcon chairImage = new ImageIcon("./img/chairImage.png");
-      ImageIcon rustyKnifeImage = new ImageIcon("./img/rustyKnife.png");
       ImageIcon chalkBoardImage = new ImageIcon("./img/chalkBoardImage.png");
       ImageIcon computerImage = new ImageIcon("./img/computerImage.png");
       ImageIcon cabinetImage = new ImageIcon("./img/cabinetImage.png");
       ImageIcon neutralImage = new ImageIcon("./img/neutralImage.png");
+      ImageIcon deskImage = new ImageIcon("./img/deskImage.png");
       Object classroomObject[] = { "front table", "desk", "chair", "computer", "chalk board", "cabinet", "go back" };
       Object cabinetObject[] = { "open cabinet", "go back" };
       Object neutralObject[] = { "exit", "start over" };
@@ -392,9 +392,8 @@ public class HauntedHouse {
          game.classroom(game, inventory);
       } else if (classroomOption.toLowerCase().equals("desk")) {
          JOptionPane.showMessageDialog(null,
-               "You look on the desk and you find a rusty knife on the table. \n Even though you already have a nicer one, it might come in handy if it breaks.",
-               "HauntedHouse", JOptionPane.INFORMATION_MESSAGE, rustyKnifeImage);
-         inventory.add("rusty knife");
+               "You look on the desk and you look all around it. \n Just some papers and pens. \n Nothing much of use here",
+               "HauntedHouse", JOptionPane.INFORMATION_MESSAGE, deskImage);
          game.classroom(game, inventory);
       } else if (classroomOption.toLowerCase().equals("chair")) {
          JOptionPane.showMessageDialog(null,
